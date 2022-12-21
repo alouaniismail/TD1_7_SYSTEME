@@ -1,0 +1,25 @@
+1.man -k write | grep^ write
+2.ax;%eax;rax..(__, locate libc.a && objdump -d path_to__libc_founded | less / n n ..)
+3.echo.c facile (write,stdout_fileno en majuscule)
+4.wite_long:
+il positionne de gauche a droite et remplit de gauche a droite en repassant de droite a gauche c'est pour cela on a: 0005 0000 0000 0000 0008 0000 0000 0000.
+puis l'indicateur de ligne au debut..
+si on traduit en hexadecimal: | od -x.
+5.perror non man 2 perror ou man perror (librairie.. aussi possible pour deviner seulement)
+6.read standard boucle avec while(1) declaration de buffer taille constante puis read sur BUFFERSIZE et write de buffer sur le retour de type ssize_t de read. Voilà comment cela va marcher. On incremente un ecrits=0 a la sortie de la boucle a chaque tour comme cela on sait le transfert en tant que nombre d'octets (ascii code) effectues.
+7.read de meme que write_number:
+write_number affiche un 5, le programme doit lire le 5 en tant qu'entier donc read(1,&l,sizeof(long)) avec long l declare, ca va etre ecrit 5 des ./read(declenchement du programme). Premiere etape facile reussie en moyennne..
+Deuxieme etape:
+printf apres va ecrire sur stdout(bufferisation)
+le prochain read va faire ssize_t r; puis ssize_t read2=read(STDOUT_FILENO,&r,sizeof(ssize_t));
+pour lire ce qui a été produit par le printf soit mettre dans une variable qui compte les octets le nombre exact correspondant à STDOUT_FILENO soit le long l affiché et le mettre dans r via $2=&r;
+Pas precis comme explications...
+=>plus precis:
+on doit faire printf("%lu\n",retour);//le 1er retour
+puis faire ssize_t r;
+ssize_t retour2=read(STDOUT_FILENO,&r,sizeof(ssize_t));//pour mettre le nombre d'octets lus dans la variable recommandée de type ssize_t (signed size_t (%lu vs.long %ld)).
+VOILA.
+Premierement, la lecture se fera en chaine de caractere donc conversion en ascii code 5 correspond à quoi en char* (generalisation.) puis ajout de ce qu'il y avait avant puis retraduction en %ld puis premier affichage puis affichage du vrai nombre lues soit 2 pour 5.(apres le printf de sizeof() et le read(stdout_fileno,&r(type ssize_t),sizeof(ssize_t)))
+=>On remarque apres l'analyse le declenchement de la premiere erreur.
+6.struct nopad(ajout utils.h"" ""):>>
+En fait, precedemment, lorsqu'on lit ce que affiche write number cad. 5 puis mise en $2=&l avec l de type long, on va printer apres le code correspondant à la conversion contre-hexadecimal d'un texte de caractere ascii l'affichage. Puis l'affichage de sizeof() puis la lecture depuis stdout avec $2=&r avec r de type ssize_t avec sizeof_ssize_t) va afficher vraiment en od -x comme on doit convertir en hexadecimal combien de caracteres sur lequel se codera l'entier en question.(ca compte pas les 0, attention aux initialisations foireuses dans les 2 cas.).///  
