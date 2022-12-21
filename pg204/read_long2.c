@@ -23,7 +23,10 @@ int main (int argc, char **argv)
         fprintf(stderr, "\"l\" n'a pas été lu en entier\n");
         return EXIT_FAILURE;
     }
-
+    //retour contient le nombre d'octets lus
+    //cela se rejecte de stdin pour aller a stdout qui est le nouveau stdin.
+    //et nous y voilà entrain de lire le stdin soit le nombre lu dans & retour
+    //de type ssize_t.
     r = read(STDIN_FILENO, &retour, sizeof(ssize_t));
     if (-1 == r) {
         /* Something went wrong: check on perror to know what */
@@ -38,5 +41,5 @@ int main (int argc, char **argv)
     printf("valeur=%ld\n"
            "retour=%ld\n",
            l, (long) retour);
-    return EXIT_SUCCESS;
+    return EXIT_SUCCESS;//ce code est à apprendre car on l'a compris!
 }
