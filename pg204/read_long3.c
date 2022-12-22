@@ -12,19 +12,10 @@ int main(int argc, char** argv){
   long l;
   ssize_t retour=read(STDIN_FILENO,&l,sizeof(long));
   printf("%ld\n",l);
-
-  //nouveau stdin bufferisation.//en entier celui-ci seulement.///
   printf("%lu\n",retour);
-  ssize_t r;//lecture de stdout en tant que nombre d'octets imprimés.
-  ssize_t retour2=read(STDOUT_FILENO,&r,sizeof(ssize_t));
 
-  //RQ: avec l'arret au printf de retour on fait deja le boulot.(voir la 3ieme
-  //version).
-  //pour analyser l'exo.
   exit_if(retour==-1,"something wrong with read procedure.");
   exit_if(sizeof(long)!=retour,"ça n'a pas étés lus en tant qu'entier.");
-  
-  exit_if(-1==retour2,"something wrong with the second copy.");
-  exit_if(sizeof(ssize_t)!=retour2,"retour n'a pas été lue en entier(2/2)");
+
   return EXIT_SUCCESS;
 }

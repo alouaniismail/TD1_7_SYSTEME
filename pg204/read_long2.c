@@ -42,4 +42,7 @@ int main (int argc, char **argv)
            "retour=%ld\n",
            l, (long) retour);
     return EXIT_SUCCESS;//ce code est à apprendre car on l'a compris!
+
+    //ce programme ce comporte comme si il lisait en entree stdin
+    //le contenu de ./write_number en execution. (retour normal que ca soit 0;ref: lseek(length->+infini.))///
 }

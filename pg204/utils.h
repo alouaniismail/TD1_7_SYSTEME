@@ -5,8 +5,10 @@
 
 typedef struct nopad{
   char c1;
-  long l;
   char c2;
+  long l;//bourrage sur une seule ligne de taille double d'un vecteur de 8
+  //char soit 8*2=16 octets.(avec CFLAGS+=-O3 la taille ne va pas changer
+  //mais le résultat oui..)
 }nopad;
 
 /**
